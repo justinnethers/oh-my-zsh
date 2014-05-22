@@ -21,14 +21,14 @@ local current_dir='${PWD/#$HOME/~}'
 
 # Git info.
 local git_info='$(git_prompt_info)'
-ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[white]%}on%{$reset_color%} git:%{$terminfo[bold]$fg[cyan]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" %{$terminfo[bold]$fg[magenta]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$terminfo[bold]$fg[magenta]%})%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$terminfo[bold]$fg[red]%}x"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$terminfo[bold]$fg[green]%}o"
 
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
 PROMPT="
-╭─\
+%{$terminfo[bold]$fg[white]%}# \
 %{$terminfo[bold]$fg[red]%}%n\
 %{$fg[white]%}@\
 %{$terminfo[bold]$fg[blue]%}$(box_name) \
@@ -36,8 +36,7 @@ PROMPT="
 %{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
 ${git_info} \
 %{$fg[white]%}[%*]
-╰─$(prompt_char) "
-#%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+%{$terminfo[bold]$fg[white]%}$ %{$reset_color%}"
 
 if [[ "$(whoami)" == "root" ]]; then
 PROMPT="

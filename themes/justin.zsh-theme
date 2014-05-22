@@ -18,6 +18,7 @@ function prompt_char {
 
 # Directory info.
 local current_dir='${PWD/#$HOME/~}'
+local user_host='%{$terminfo[bold]$fg[red]%}%n$fg[white]@%{$terminfo[bold]$fg[blue]%}%m%{$reset_color%}'
 
 # Git info.
 local git_info='$(git_prompt_info)'
@@ -29,9 +30,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN=" %{$terminfo[bold]$fg[green]%}o"
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
 PROMPT="
 %{$terminfo[bold]$fg[white]%}# \
-%{$terminfo[bold]$fg[red]%}%n\
-%{$fg[white]%}@\
-%{$terminfo[bold]$fg[blue]%}$(box_name) \
+%{$terminfo[bold]$fg[blue]%}${user_host} \
 %{$fg[white]%}in \
 %{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
 ${git_info} \

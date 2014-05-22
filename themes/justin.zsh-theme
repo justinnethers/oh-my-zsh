@@ -11,6 +11,11 @@ function box_name {
     [ -f ~/.box-name ] && cat ~/.box-name || hostname
 }
 
+function prompt_char {
+  git branch >/dev/null 2>/dev/null && echo "±" && return
+  echo '○'
+}
+
 # Directory info.
 local current_dir='${PWD/#$HOME/~}'
 
@@ -23,15 +28,16 @@ ZSH_THEME_GIT_PROMPT_CLEAN=" %{$terminfo[bold]$fg[green]%}o"
 
 # Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
 PROMPT="
-%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%{$terminfo[bold]$fg[cyan]%}%n \
-%{$fg[white]%}at \
-%{$terminfo[bold]$fg[green]%}$(box_name) \
+╭─\
+%{$terminfo[bold]$fg[red]%}%n\
+%{$fg[white]%}@\
+%{$terminfo[bold]$fg[blue]%}$(box_name) \
 %{$fg[white]%}in \
 %{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
 ${git_info} \
 %{$fg[white]%}[%*]
-%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+╰─$(prompt_char) "
+#%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
 
 if [[ "$(whoami)" == "root" ]]; then
 PROMPT="
